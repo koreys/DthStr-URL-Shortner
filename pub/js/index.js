@@ -86,16 +86,25 @@ $('#statsSubmitBtn').click(function(e){
 
     let statsDivReplacement = template(statsTemp, { shortUrl : urlStats, clickNumber : results.statsData.clicks });
 
-    let statsConsole = `<div id="ipStatsDiv">Current Time: ${moment()}<br/>Searching HoloNet for use of: ${results.statsData.shortUrl}...<br/>Search Results:<br/>phasma@dthstr:~$&nbsp;<br/>`
+    let statsConsole = `<div id="ipStatsDiv">
+                          <div class="heading">
+                            <i class="fa fa-circle pull-left" style="color:#A16;"></i>
+                            <i class="fa fa-circle pull-left" style="color:#EB1;"></i>
+                            HoloNet Term
+                          </div>
+                          <div class="termBody">
+                          Current Time: ${moment()}<br/>
+                          phasma@dthstr:~$&nbsp;grep ${results.statsData.shortUrl} *.<br/>
+                          Search Results:<br/>`
     results.statsData.stats.forEach(function(item,index){
-      let ipStat = `<span class="ipStat">${index} - Ip Address: ${item.ip} at time: ${moment.unix(item.clickTime)} (${moment.unix(item.clickTime).fromNow()})</span><br/>`
+      let ipStat = `<span class="ipStat">${index} | IpAddr: ${item.ip} | time: ${moment.unix(item.clickTime)} (${moment.unix(item.clickTime).fromNow()})</span><br/>`
       statsConsole += ipStat;
     });
-    statsConsole += '</div>';
+    statsConsole += 'phasma@dthstr:~<span class="cursor">&#9646;</span></div></div>';
     statsDivReplacement += statsConsole;
 
     $('#statsDiv').html(statsDivReplacement);
-    $('#urlDiv').addClass('animated zoomIn');
+    $('#statsDiv').addClass('animated zoomIn');
 
 
     });
