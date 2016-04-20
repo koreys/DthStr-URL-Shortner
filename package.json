@@ -1,14 +1,15 @@
 {
-  "name": "dthstr-short-url",
+  "name": "dthstr-url-shortner",
   "version": "1.0.0",
-  "description": "A url shortner with a cool name.",
+  "description": "A url shortner from the dark side.",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "url",
-    "shortner"
+    "shortner",
+    "url-shortner"
   ],
   "author": "Korey Stanley",
   "license": "ISC",

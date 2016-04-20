@@ -22,7 +22,8 @@ let statsTemp = `
   <h2 class="centerWhenSmall">The empire has been watching closely!</h2>
   <h1>The URL '{shortUrl}' has been used {clickNumber} times.</h1>
   <h2 class="centerWhenSmall">Captain Phasma's detailed analysis shows the folowing:</h2>
-</div>`
+</div>
+<div class="clearfix"></div>`
 
 //click function for the useForceBtn
 $('#useForceBtn').click(function(e){
