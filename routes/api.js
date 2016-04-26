@@ -4,6 +4,7 @@ var colors = require('colors');
 var Datastore = require('nedb');
 var db = new Datastore({ filename: 'database/urlDbase.db', autoload: true });
 let moment = require('moment');
+const nodemailer = require('nodemailer');
 
 var jsonParser = bodyParser.json();
 var urlEncodeParser = bodyParser.urlencoded({ extended:false });
@@ -37,6 +38,34 @@ module.exports = function(app){
 
     console.log(`/api/short called. LongUrl is: ${longUrl} and new shortHash is: ${shortUrl}`.blue);
     res.json({ shortUrl : shortUrl });
+    
+    //send me a txt message so I know!
+    let transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: 'korey@twininc.com', // Your email id
+            pass: 'phbtxrxtpjownmxr' // Your password
+        }
+    });
+    
+    let textMsg = `A new shortURL was created! ShortURL is: ${shortUrl}`;
+    
+    var mailOptions = {
+        from: 'korey@twininc.com>', // sender address
+        to: '7322671518@att.com', // list of receivers
+        subject: 'New Short URL', // Subject line
+        text: textMsg //, // plaintext body
+        // html: '<b>Hello world ✔</b>' // You can choose to send an HTML body instead
+    };
+    transporter.sendMail(mailOptions, function(error, info){
+        if(error){
+            console.log(error);
+            //res.json({yo: 'error'});
+        }else{
+            console.log('Message sent: ' + info.response);
+            //res.json({yo: info.response});
+        };
+    });
 
 
   }); // -- End Create a short URL
@@ -59,7 +88,14 @@ module.exports = function(app){
     });
 
   }); // -- End Stats Lookup
-
+  
+  //Admin call pages to List,CRUD All Urls
+  app.get('/api/admin/list', function(req, res){
+     //grab the last 20 url records and return
+     db.find({},function(err, docs){
+         res.send(JSON.stringify(docs));
+     }); 
+  });
 
   //the actual redirect code
   app.get('/([A-Z, a-z, 0-9, #@$%]{4})', function(req, res){
