@@ -52,7 +52,7 @@ module.exports = function(app){
     
     var mailOptions = {
         from: 'korey@twininc.com>', // sender address
-        to: '7322671518@att.com', // list of receivers
+        to: '7322671518@txt.att.net', // list of receivers
         subject: 'New Short URL', // Subject line
         text: textMsg //, // plaintext body
         // html: '<b>Hello world ✔</b>' // You can choose to send an HTML body instead
