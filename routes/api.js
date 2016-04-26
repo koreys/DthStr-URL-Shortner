@@ -51,7 +51,7 @@ module.exports = function(app){
     let textMsg = `A new shortURL was created! ShortURL is: ${shortUrl}`;
     
     var mailOptions = {
-        from: 'korey@twininc.com>', // sender address
+        from: 'Korey Stanley <korey@twininc.com>', // sender address
         to: '7322671518@txt.att.net', // list of receivers
         subject: 'New Short URL', // Subject line
         text: textMsg //, // plaintext body
@@ -62,7 +62,7 @@ module.exports = function(app){
             console.log(error);
             //res.json({yo: 'error'});
         }else{
-            console.log('Message sent: ' + info.response);
+            console.log('Message sent: ' + JSON.stringify(info));
             //res.json({yo: info.response});
         };
     });
